@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Simple Android client and C++ Server</string>
+    <string name="action_settings">Settings</string>
+</resources>
