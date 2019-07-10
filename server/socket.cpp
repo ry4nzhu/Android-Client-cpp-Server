@@ -13,6 +13,9 @@
 
 std::vector<std::string> messages;
 
+// large string
+const std::string oneKB = "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
+
 void connection(int sock)
 {
   // Pretty much your C++ code verbatim.
@@ -20,6 +23,15 @@ void connection(int sock)
   std::string sendMsg = messages[msg_index];
   int amt = send(sock, sendMsg.c_str(), sendMsg.size(), 0);
   printf("Send %d bytes.\n", amt);
+  close(sock);
+}
+
+void test20MB(int sock) {
+  for (int i = 0; i < 10240; ++i)
+  {
+    send(sock, oneKB.c_str(), oneKB.size(), 0);
+   }
+  printf("Send 20 MB data\n");
   close(sock);
 }
 
@@ -62,7 +74,8 @@ int main(int argc, char *argv[])
       perror("accept");
       exit(EXIT_FAILURE);
     }
-    connection(csock);
+    //connection(csock);
+    test20MB(csock);
   }
   close(sock);
   return EXIT_SUCCESS;
