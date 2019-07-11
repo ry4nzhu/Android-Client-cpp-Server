@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                             OkHttpClient client = builder.build();
                             long startTime = System.currentTimeMillis();
                             Request request = new Request.Builder().
-                                    url("http://35.3.60.51:8080/100 MB.file").
+                                    url("http://35.3.60.51:8080/20MB.file").
                                     build();
                             client.newCall(request).enqueue(new Callback() {
                                 @Override
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                         long endTime = System.currentTimeMillis();
                                         Log.d("time:", Long.toString(endTime - startTime));
+
                                     }
                                 }
                             });
